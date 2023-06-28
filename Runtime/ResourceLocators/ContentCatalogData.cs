@@ -723,7 +723,7 @@ namespace UnityEngine.AddressableAssets.ResourceLocators
                 if (isNew)
                 {
                     //if this combination of dependecies is new, add a new entry and add its key to all contained entries
-                    var deps = entry.Dependencies.Select(d => keyIndexToEntries[d][0]).ToList();
+                    var deps = entry.Dependencies.Where(d => keyIndexToEntries[d] != null && keyIndexToEntries[d].Count > 0).Select(d => keyIndexToEntries[d][0]).ToList();
                     keyIndexToEntries.Add(hashCode, deps);
                     foreach (var dep in deps)
                         dep.Keys.Add(hashCode);
